@@ -24,16 +24,23 @@ app.controller('myCtrl', function($scope)
 				{txt:"var bbbbb",id:312,val:false},
 				{txt:"var dddd rrr tt",id:313,val:false}
 				]}
-			}
-			{text:'fourth question',id:13, dim: {type:3}
-			}
+			},
+			{text:'fourth question',id:12, dim: {type:3, sel:"abc"}}
+
 		];
 		
 		$scope.instruction = 'это текст общей инструкции к прохождению исследования';
 		
-		$scope.myFunction = function() 
+		$scope.myFinFun = function() 
 		{
-			$scope.count++;
+			//alert ('click');
+			$scope.ci_index = 0;
+		}
+		$scope.btnClickFun = function(arg) 
+		{
+			
+			$scope.items[$scope.ci_index].dim.sel = arg
+			$scope.ci_index++;
 		}
 		
 		$scope.ci_index = 0;

@@ -26,7 +26,7 @@
 	<!-- одиночн.выбор (button) -->
 	<div ng-show="items[ci_index].dim.type == 1 && items[ci_index].dim.mode != 2" style="background-color:lightgreen">
 		<div ng-repeat="x in items[ci_index].dim.subscl">
-			<button ng-click="myFunction(x.id)">
+			<button ng-click="btnClickFun(x.id)">
 				{{x.txt}}
 			</button>
 		</div>
@@ -40,15 +40,15 @@
 	</div>
 	<!-- открытй -->
 	<div ng-show="items[ci_index].dim.type == 3" style="background-color:lightgray">
-		
+		<input type="text" data-ng-model="items[ci_index].dim.sel"/>
 	</div>
 
-	<p>
-		<button ng-click="ci_index = ci_index - 1">prior</button>
+	<p ng-show="!(items[ci_index].dim.type == 1 && items[ci_index].dim.mode == 1)">
+		<button ng-click="ci_index = ci_index - 1" >prior</button>
 		<button ng-click="ci_index = ci_index + 1">next</button>
 	</p>
 	<hr/>
-	<button ng-click="myFunction()">FIN</button>
+	<button ng-click="myFinFun()">FIN</button>
 </div>
 
 <script src="myApp.js"></script>
