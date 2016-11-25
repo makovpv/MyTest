@@ -23,7 +23,7 @@ app.controller('myCtrl', function($scope, $interval)
 			},
 			{text:'third question',id:12, dim: {type:2, mode:2, sel:0, 
 				subscl:[
-				{txt:"var zzzzz",id:311,val:true},
+				{txt:"var zzzzz",id:311,val:false},
 				{txt:"var bbbbb",id:312,val:false},
 				{txt:"var dddd rrr tt",id:313,val:false}
 				]}
@@ -33,20 +33,35 @@ app.controller('myCtrl', function($scope, $interval)
 		];
 		
 		$scope.instruction = 'это текст общей инструкции к прохождению исследования';
-		
+		$scope.valid_answer = false;
+		/***********************************/
 		$scope.myFinFun = function() 
 		{
 			//alert ('click');
 			$scope.ci_index = 0;
 			$interval.cancel(timer);
 		}
+		/***********************************/
+		$scope.btnNextClick = function() 
+		{
+			if ($scope.items[$scope.ci_index].dim.sel != 0)
+			{
+				$scope.ci_index = $scope.ci_index + 1
+			}
+		}		
+		/***********************************/
+		$scope.btnPriorClick = function() 
+		{
+			$scope.ci_index = $scope.ci_index - 1
+		}	
+		/***********************************/
 		$scope.btnClickFun = function(arg) 
 		{
 			
 			$scope.items[$scope.ci_index].dim.sel = arg
 			$scope.ci_index++;
 		}
-		
+		/***********************************/
 		$scope.ci_index = 0;
 		$scope.item_vis = 1;
 		$scope.variant_vis = 1;
