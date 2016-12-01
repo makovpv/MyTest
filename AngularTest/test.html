@@ -39,14 +39,17 @@
 				{{x.txt}}
 			</button>
 		</div>
-	</div>	
+	</div>
 	<!-- множ.выбор или сотрудники -->
 	<div ng-show="items[ci_index].dim.type == 2 || items[ci_index].dim.type == 13" style="background-color:lightgray">
 		<label ng-repeat="x in items[ci_index].dim.subscl">
-			<input type='checkbox' data-ng-model="x.val" data-ng-checked="x.val" ng-required="!items[ci_index].dim.sel"/> 
+			<input type='checkbox' data-ng-model="x.val" data-ng-checked="x.val"/>
 			{{x.txt}}
 		</label>
+		<div ng-show="!valid_answer" style="background-color:red">Необходимо выбрать один или несколько вариантов</div>	
 	</div>
+	
+	
 	<!-- открытй -->
 	<div ng-show="items[ci_index].dim.type == 3" style="background-color:lightgray">
 		<input type="text" data-ng-model="items[ci_index].dim.sel"/>

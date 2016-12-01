@@ -33,7 +33,23 @@ app.controller('myCtrl', function($scope, $interval)
 		];
 		
 		$scope.instruction = 'это текст общей инструкции к прохождению исследования';
-		$scope.valid_answer = false;
+		$scope.valid_answer = true;
+		/***********************************/
+		function is_correct_choise_for (dmn)
+		{
+			switch (dmn.type)
+			{
+				case 1: return dmn.sel != 0;
+				case 2: 
+					is_sel=false;
+					for (var i=0, len=dmn.subscl.length; i<len; i++)
+					{
+						if (dmn.subscl[i].val) {is_sel=true; break;}
+					}
+					return is_sel;
+				default: return false;
+			}
+		}
 		/***********************************/
 		$scope.myFinFun = function() 
 		{
@@ -44,9 +60,11 @@ app.controller('myCtrl', function($scope, $interval)
 		/***********************************/
 		$scope.btnNextClick = function() 
 		{
-			if ($scope.items[$scope.ci_index].dim.sel != 0)
+			$scope.valid_answer = false;
+			if (is_correct_choise_for ($scope.items[$scope.ci_index].dim))
 			{
-				$scope.ci_index = $scope.ci_index + 1
+				$scope.ci_index++;
+				$scope.valid_answer = true;
 			}
 		}		
 		/***********************************/
