@@ -3,19 +3,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
 
+<link rel="stylesheet" type="text/css" href="style.css">
+
 <body>
 
 <form ng-app="myApp" ng-controller="myCtrl" name="mainForm">
 	
 	<div ng-show="instruction_vis">
-		{{instruction}}
 		<p>
-		<button ng-click="btnStartClick()">Начать тестирование</button>
+		{{instruction}}
 		</p>
+		<button ng-click="btnStartClick()">Начать тестирование</button>
 	</div>
 	
 	<div ng-show="!instruction_vis">
-		<div ng-show="item_vis" style="background-color:lightblue">
+		<div ng-show="item_vis">
 			ITEMMM
 			<p ng-bind="blocks[block_idx].items[ci_index].text"></p>
 			<!-- {{ '('+ items[ci_index].id + ') ' + items[ci_index].text }} -->
@@ -23,7 +25,7 @@
 		
 		<!-- одиночн.выбор (radio) -->
 		<div ng-show="blocks[block_idx].items[ci_index].dim.type == 1 && blocks[block_idx].items[ci_index].dim.mode == 2">
-			<div style="background-color:lightgreen">
+			<div>
 			<label ng-repeat="x in blocks[block_idx].items[ci_index].dim.subscl">
 				<input type='radio' data-ng-model="blocks[block_idx].items[ci_index].dim.sel" data-ng-value="x.id" ng-required="!blocks[block_idx].items[ci_index].dim.sel"/>
 				{{x.txt}}
@@ -45,7 +47,7 @@
 			</div>
 		</div>
 		<!-- множ.выбор или сотрудники -->
-		<div ng-show="blocks[block_idx].items[ci_index].dim.type == 2 || blocks[block_idx].items[ci_index].dim.type == 13" style="background-color:lightgray">
+		<div ng-show="blocks[block_idx].items[ci_index].dim.type == 2 || blocks[block_idx].items[ci_index].dim.type == 13">
 			<label ng-repeat="x in blocks[block_idx].items[ci_index].dim.subscl">
 				<input type='checkbox' data-ng-model="x.val" data-ng-checked="x.val"/>
 				{{x.txt}}
@@ -55,7 +57,7 @@
 		
 		
 		<!-- открытй -->
-		<div ng-show="blocks[block_idx].items[ci_index].dim.type == 3" style="background-color:lightgray">
+		<div ng-show="blocks[block_idx].items[ci_index].dim.type == 3">
 			<input type="text" data-ng-model="blocks[block_idx].items[ci_index].dim.sel"/>
 			<br/>
 			<textarea rows="4" cols="50" ng-model="blocks[block_idx].items[ci_index].dim.sel"></textarea>
