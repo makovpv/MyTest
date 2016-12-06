@@ -3,18 +3,29 @@ button {
 	color: white;
 }
 
-p {
+/*
+#Ctrl_123 {
+	color: blue;
+}
+*/
+
+.instruction {
 	font-family: verdana;
 	text-align: center;
 	font-size: 20px;
 	
+	border: 2px solid orange;
+	border-radius: 10px;
+	
 	background-color: lightgray; 
 }
 
-#Ctrl_123 {
-	color: blue;
+.answer
+{
+	background-color: yellow; 
 }
 
-.class_456 {
-	color: yellow;
+.workarea {
+	margin-left: 10%;
+	margin-right: 10%;
 }

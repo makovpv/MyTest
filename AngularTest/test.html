@@ -8,74 +8,75 @@
 <body>
 
 <form ng-app="myApp" ng-controller="myCtrl" name="mainForm">
-	
-	<div ng-show="instruction_vis">
-		<p>
-		{{instruction}}
-		</p>
-		<button ng-click="btnStartClick()">Начать тестирование</button>
-	</div>
-	
-	<div ng-show="!instruction_vis">
-		<div ng-show="item_vis">
-			ITEMMM
-			<p ng-bind="blocks[block_idx].items[ci_index].text"></p>
-			<!-- {{ '('+ items[ci_index].id + ') ' + items[ci_index].text }} -->
+	<div class="workarea">
+		<div ng-show="instruction_vis">
+			<p class="instruction">
+			{{instruction}}
+			</p>
+			<button ng-click="btnStartClick()">Начать тестирование</button>
 		</div>
 		
-		<!-- одиночн.выбор (radio) -->
-		<div ng-show="blocks[block_idx].items[ci_index].dim.type == 1 && blocks[block_idx].items[ci_index].dim.mode == 2">
-			<div>
-			<label ng-repeat="x in blocks[block_idx].items[ci_index].dim.subscl">
-				<input type='radio' data-ng-model="blocks[block_idx].items[ci_index].dim.sel" data-ng-value="x.id" ng-required="!blocks[block_idx].items[ci_index].dim.sel"/>
-				{{x.txt}}
-			</label>
+		<div ng-show="!instruction_vis">
+			<div ng-show="item_vis">
+				ITEMMM
+				<p ng-bind="blocks[block_idx].items[ci_index].text"></p>
+				<!-- {{ '('+ items[ci_index].id + ') ' + items[ci_index].text }} -->
 			</div>
 			
-			<!-- <span>
-				<label>выберите один из вариантов, пожалуйста</label>
-				<h1>{{mainForm.myInput.$valid}}</h1>
-			</span> -->
-		</div>
-		
-		<!-- одиночн.выбор (button) -->
-		<div ng-show="blocks[block_idx].items[ci_index].dim.type == 1 && blocks[block_idx].items[ci_index].dim.mode != 2" style="background-color:lightgreen">
-			<div ng-repeat="x in blocks[block_idx].items[ci_index].dim.subscl">
-				<button ng-click="btnClickFun(x.id)">
+			<!-- одиночн.выбор (radio) -->
+			<div ng-show="blocks[block_idx].items[ci_index].dim.type == 1 && blocks[block_idx].items[ci_index].dim.mode == 2" class="answer">
+				<div>
+				<label ng-repeat="x in blocks[block_idx].items[ci_index].dim.subscl">
+					<input type='radio' data-ng-model="blocks[block_idx].items[ci_index].dim.sel" data-ng-value="x.id" ng-required="!blocks[block_idx].items[ci_index].dim.sel"/>
 					{{x.txt}}
-				</button>
+				</label>
+				</div>
+				
+				<!-- <span>
+					<label>выберите один из вариантов, пожалуйста</label>
+					<h1>{{mainForm.myInput.$valid}}</h1>
+				</span> -->
 			</div>
-		</div>
-		<!-- множ.выбор или сотрудники -->
-		<div ng-show="blocks[block_idx].items[ci_index].dim.type == 2 || blocks[block_idx].items[ci_index].dim.type == 13">
-			<label ng-repeat="x in blocks[block_idx].items[ci_index].dim.subscl">
-				<input type='checkbox' data-ng-model="x.val" data-ng-checked="x.val"/>
-				{{x.txt}}
-			</label>
-			<div ng-show="!valid_answer" style="background-color:red">Необходимо выбрать один или несколько вариантов</div>	
-		</div>
-		
-		
-		<!-- открытй -->
-		<div ng-show="blocks[block_idx].items[ci_index].dim.type == 3">
-			<input type="text" data-ng-model="blocks[block_idx].items[ci_index].dim.sel"/>
-			<br/>
-			<textarea rows="4" cols="50" ng-model="blocks[block_idx].items[ci_index].dim.sel"></textarea>
-		</div>
-		
-		<div ng-show="blocks[block_idx].items[ci_index].dim.time_restrict == 1">
-			{{counter}}
-		</div>
+			
+			<!-- одиночн.выбор (button) -->
+			<div ng-show="blocks[block_idx].items[ci_index].dim.type == 1 && blocks[block_idx].items[ci_index].dim.mode != 2" class="answer">
+				<div ng-repeat="x in blocks[block_idx].items[ci_index].dim.subscl">
+					<button ng-click="btnClickFun(x.id)">
+						{{x.txt}}
+					</button>
+				</div>
+			</div>
+			<!-- множ.выбор или сотрудники -->
+			<div ng-show="blocks[block_idx].items[ci_index].dim.type == 2 || blocks[block_idx].items[ci_index].dim.type == 13" class="answer">
+				<label ng-repeat="x in blocks[block_idx].items[ci_index].dim.subscl">
+					<input type='checkbox' data-ng-model="x.val" data-ng-checked="x.val"/>
+					{{x.txt}}
+				</label>
+				<div ng-show="!valid_answer" style="background-color:red">Необходимо выбрать один или несколько вариантов</div>	
+			</div>
+			
+			
+			<!-- открытй -->
+			<div ng-show="blocks[block_idx].items[ci_index].dim.type == 3" class="answer">
+				<input type="text" data-ng-model="blocks[block_idx].items[ci_index].dim.sel"/>
+				<br/>
+				<textarea rows="4" cols="50" ng-model="blocks[block_idx].items[ci_index].dim.sel"></textarea>
+			</div>
+			
+			<div ng-show="blocks[block_idx].items[ci_index].dim.time_restrict == 1">
+				{{counter}}
+			</div>
 
-		<p>
-			<button ng-click="btnPriorClick()" >prior</button>
-			<button ng-click="btnNextClick()" ng-show="!(blocks[block_idx].items[ci_index].dim.type == 1 && blocks[block_idx].items[ci_index].dim.mode == 1)">next</button>
-		</p>
+			<p>
+				<button ng-click="btnPriorClick()" >prior</button>
+				<button ng-click="btnNextClick()" ng-show="!(blocks[block_idx].items[ci_index].dim.type == 1 && blocks[block_idx].items[ci_index].dim.mode == 1)">next</button>
+			</p>
+			
 		
-	
+		</div>
+		<hr/>
+		<button ng-click="myFinFun()">FIN</button>
 	</div>
-	<hr/>
-	<button ng-click="myFinFun()">FIN</button>
 </form>
 
 <script src="myApp.js"></script>
