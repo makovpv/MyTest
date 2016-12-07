@@ -2,7 +2,7 @@ var app = angular.module('myApp',[]);
 app.controller('myCtrl', function($scope, $interval) 
 {
 		$scope.blocks = [
-			{instr:'инструкция к первому блоку вопросов', time_limit:0, random_ans_ord:0,
+			{instr:'инструкция к первому блоку вопросов. Нужно делать так, и не нужно делать не так', time_limit:0, random_ans_ord:0,
 				items:[
 				{text:'first question',id:10, dim: {type:1, mode:2, sel:0, time_restrict:1,
 					subscl:[
