@@ -9,11 +9,33 @@
 
 <body>
 
+<div class="pg_header">одностраничный режим</div>
+
 <form name="mainForm" ng-app="myApp" ng-controller="myCtrl">
 	<div class="workarea">
 	
 		<div ng-repeat="x in blocks[0].items">
-			<label>{{x.text}}</lavel>
+			<p>{{x.text}}</p>
+			<!-- radio -->
+			<div ng-repeat="y in x.dim.subscl" class="answer" ng-show="x.dim.type==1">
+				<input type='radio' data-ng-model="x.dim.sel" data-ng-value="y.id" />
+				<label>{{y.txt}}</lavel>
+			</div>
+			<!-- buttons not relevant! -->
+			<!-- <div ng-repeat="y in x.dim.subscl" class="answer" ng-show="x.dim.type==1 && x.dim.mode!=2">
+				<button ng-click="btnClickFun(y.id)" class="answer_btn">
+					{{y.txt}}
+				</button>
+			</div> -->
+			<!-- checkbox -->
+			<div ng-repeat="y in x.dim.subscl" class="answer" ng-show="x.dim.type==2 || x.dim.type==13">
+				<input type='checkbox' data-ng-model="y.val" data-ng-checked="y.val"/>
+				{{y.txt}}
+			</div>
+			<!-- text -->
+			<div ng-show="x.dim.type==3">
+				<textarea rows="4" cols="100" ng-model="x.dim.sel"></textarea>
+			</div>
 		</div>
 	
 		<hr/>
@@ -65,6 +87,7 @@
 	});
 </script> -->
 
+<div class="pg_footer">footer</div>
 
 </body>
 </html>

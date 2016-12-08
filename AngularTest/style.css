@@ -14,7 +14,6 @@ button {
 	text-align: center; /*justify;*/
 	font-size: 1.4em;
 	
-	
 	border: 2px solid orange;
 	border-radius: 10px;
 	
@@ -23,10 +22,41 @@ button {
 
 .answer
 {
-	background-color: yellow; 
+	background-color: #ffffcc; 
+	
 }
+.answer_btn
+{
+	background-color: darkgray; 
+	color: white;
+}
+
 
 .workarea {
 	margin-left: 10%;
 	margin-right: 10%;
+	
+	margin-top: 20px;
+	margin-bottom: 20px;
+	
+	
+}
+
+.pg_footer {
+	background-color: orange;
+	position: fixed;
+	bottom:0;
+
+	margin-left: 10%;
+	margin-right: 10%;
+	width: 80%;
+}
+.pg_header {
+	background-color: orange;
+	position: fixed;
+	top:0;
+
+	margin-left: 10%;
+	margin-right: 10%;
+	width: 80%;
 }
