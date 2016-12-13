@@ -12,8 +12,9 @@
 	<hr/>
 	<div ID="demo" >RRRR</div>
 
-	<button onclick="go_fun()">GO</button>
-	<button onclick="get_serv_data()">GET DATA</button>
+	<button onclick="go_fun()">TXT</button>
+	<button onclick="get_serv_data_X()">ASPX</button>
+	<button onclick="get_serv_data()">ASP</button>
 	
 	<script>
 		function go_fun ()
@@ -32,6 +33,19 @@
 		
 		
 	function get_serv_data ()
+	{
+			var xhttp = new XMLHttpRequest();
+			
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+				 document.getElementById("demo").innerHTML = this.responseText;
+				}
+			  };
+			  xhttp.open("GET", "fun_library.asp", true);
+			  xhttp.send();
+	};
+	
+	function get_serv_data_X ()
 	{
 			var xhttp = new XMLHttpRequest();
 			
