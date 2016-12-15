@@ -34,12 +34,25 @@ app.controller('myCtrl', function($scope, $interval)
 				// ]
 			// }
 		// ];
-		var scope_blocks = '{"instr":"инструкция к первому блоку вопросов. Нужно делать так, и не нужно делать не так","time_limit":0,"random_ans_ord":0,"items":[{"text":"first QQQ","id":10,"dim":{"type":1,"mode":2,"sel":0,"time_restrict":1,"subscl":[{"txt":"var1","id":111},{"txt":"var2","id":112},{"txt":"var3","id":113}]}}]}';
-		$scope.blocks = JSON.parse (scope_blocks);
+		get_serv_data ();
 		
 		$scope.instruction = 'это текст общей инструкции к прохождению исследования';
 		$scope.instruction_vis = 1;
 		$scope.valid_answer = true;
+		/***********************************/
+		function get_serv_data ()
+		{
+				var xhttp = new XMLHttpRequest();
+				
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+					 //document.getElementById("demo").innerHTML = this.responseText;
+					 $scope.blocks = JSON.parse (this.responseText);
+					}
+				  };
+				  xhttp.open("GET", "fun_library.asp", true);
+				  xhttp.send();
+		};
 		/***********************************/
 		function is_correct_choise_for (dmn)
 		{
