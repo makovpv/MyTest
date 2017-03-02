@@ -50,7 +50,8 @@ app.controller('myCtrl', function($scope, $interval)
 					 $scope.blocks = JSON.parse (this.responseText);
 					}
 				  };
-				  xhttp.open("GET", "fun_library.asp", true);
+				  //xhttp.open("GET", "fun_library.asp", true);
+				  xhttp.open("GET", "contact/get4", true);
 				  xhttp.send();
 		};
 		/***********************************/
