@@ -1,40 +1,8 @@
 var app = angular.module('myApp',[]);
-app.controller('myCtrl', function($scope, $interval) 
+app.controller('myCtrl', function($scope, $interval, $http) 
 {
-		// $scope.blocks = [
-			// {instr:'инструкция к первому блоку вопросов. Нужно делать так, и не нужно делать не так', time_limit:0, random_ans_ord:0,
-				// items:[
-				// {text:'first question',id:10, dim: {type:1, mode:2, sel:0, time_restrict:1,
-					// subscl:[
-					// {txt:"var 1",id:111},
-					// {txt:"var 2",id:112},
-					// {txt:"var 3",id:113}
-					// ]}
-				// },
-				// {text:'second question',id:11, dim: {type:1, mode:1, sel:0, 
-					// subscl:[
-					// {txt:"var 11",id:211},
-					// {txt:"var 22",id:212},
-					// {txt:"var 33",id:213}
-					// ]},
-				// },
-				// {text:'third question',id:12, dim: {type:2, mode:2, sel:0, 
-					// subscl:[
-					// {txt:"var zzzzz",id:311,val:false},
-					// {txt:"var bbbbb",id:312,val:false},
-					// {txt:"var dddd rrr tt",id:313,val:false}
-					// ]}
-				// },
-				// {text:'fourth question',id:12, dim: {type:3, sel:"abc"}}
-				// ]
-			// },
-			// {instr:'инструкция ко второму блоку вопросов', time_limit:0, random_ans_ord:0,
-				// items:[
-					// {text:'это вопрос из нового блока',id:15, dim: {type:3}}
-				// ]
-			// }
-		// ];
-		get_serv_data ();
+		//get_serv_data ();
+		get_fake_data ();
 		
 		$scope.instruction = 'это текст общей инструкции к прохождению исследования';
 		$scope.instruction_vis = 1;
@@ -45,15 +13,55 @@ app.controller('myCtrl', function($scope, $interval)
 				var xhttp = new XMLHttpRequest();
 				
 				xhttp.onreadystatechange = function() {
+					var tmp;
+				
 					if (this.readyState == 4 && this.status == 200) {
 					 //document.getElementById("demo").innerHTML = this.responseText;
 					 $scope.blocks = JSON.parse (this.responseText);
+					 tmp = JSON.parse (this.responseText);
+					 tmp = $scope.blocks;
 					}
 				  };
 				  //xhttp.open("GET", "fun_library.asp", true);
 				  xhttp.open("GET", "contact/get4", true);
 				  xhttp.send();
 		};
+		function get_fake_data ()
+		{
+			$scope.blocks = [
+				{instr:'инструкция к первому блоку вопросов. нужно делать так, и не нужно делать не так', time_limit:0, random_ans_ord:0,
+					items:[
+					{text:'first question',id:10, dim: {type:1, mode:2, sel:0, time_restrict:1,
+						subscl:[
+						{txt:"var 1",id:111},
+						{txt:"var 2",id:112},
+						{txt:"var 3",id:113}
+						]}
+					},
+					{text:'second question',id:11, dim: {type:1, mode:1, sel:0, 
+						subscl:[
+						{txt:"var 11",id:211},
+						{txt:"var 22",id:212},
+						{txt:"var 33",id:213}
+						]},
+					},
+					{text:'third question',id:12, dim: {type:2, mode:2, sel:0, 
+						subscl:[
+						{txt:"var zzzzz",id:311,val:false},
+						{txt:"var bbbbb",id:312,val:false},
+						{txt:"var dddd rrr tt",id:313,val:false}
+						]}
+					},
+					{text:'fourth question',id:12, dim: {type:3, sel:"abc"}}
+					]
+				},
+				{instr:'инструкция ко второму блоку вопросов', time_limit:0, random_ans_ord:0,
+					items:[
+						{text:'это вопрос из нового блока',id:15, dim: {type:3}}
+					]
+				}
+			];		
+		}
 		/***********************************/
 		function is_correct_choise_for (dmn)
 		{
@@ -82,6 +90,10 @@ app.controller('myCtrl', function($scope, $interval)
 			//alert ('click');
 			$scope.ci_index = 0;
 			$interval.cancel(timer);
+			
+			$http.post(
+				'contact/MyPostAction', JSON.stringify($scope.blocks), {headers: {'Content-Type': 'application/json'}}
+				);
 		}
 		/***********************************/
 		$scope.btnNextClick = function() 
